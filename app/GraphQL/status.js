@@ -3,11 +3,11 @@ import * as db from '../database'
 
 export const typeDefs = gql`
     extend type Query {
-        priorities: [Priority]
-        priority(id: ID!): Priority
+        allStatus: [Status]
+        status(id: ID!): Status
     }
 
-    type Priority {
+    type Status {
         id: ID!
         slug: String
         name: String
@@ -16,8 +16,7 @@ export const typeDefs = gql`
 
 export const resolvers = {
     Query: {
-        priorities: async () => db.priorities.findAll(),
-        priority: async (obj, args, context, info) =>
-            db.priorities.findByPk(args.id),
+        allStatus: async () => db.status.findAll(),
+        status: async (obj, args, context, info) => db.status.findByPk(args.id),
     },
 }
