@@ -20,25 +20,35 @@ export const typeDefs = gql`
         assigned_to_user: User
     }
 `
-
+//
+// export const resolvers = {
+//     Query: {
+//         tickets: async () => db.tickets.findAll().map(value => {
+//             value.subject = 'this is a subject ahhh';
+//             console.log('awsome ahh? ', value)
+//             return value
+//         }),
+//         ticket: async (obj, args, context, info) =>
+//             db.tickets.findByPk(args.id),
+//     },
+//     Ticket: {
+//         user: async (obj, args, context, info) =>
+//             db.users.findByPk(obj.user_id),
+//         priority: async (obj, args, context, info) =>
+//             db.priorities.findByPk(obj.priority_id),
+//         status: async (obj, args, context, info) =>
+//             db.status.findByPk(obj.status_id),
+//         assigned_to_user: async (obj, args, context, info) =>
+//             db.users.findByPk(obj.assigned_to_user_id),
+//     },
+// }
 export const resolvers = {
     Query: {
-        tickets: async () => db.tickets.findAll().map(value => {
-            value.subject = 'this is a subject ahhh';
-            console.log('awsome ahh? ', value)
-            return value
-        }),
+        tickets: async () => db.tickets.findAll(),
         ticket: async (obj, args, context, info) =>
             db.tickets.findByPk(args.id),
     },
     Ticket: {
-        user: async (obj, args, context, info) =>
-            db.users.findByPk(obj.user_id),
-        priority: async (obj, args, context, info) =>
-            db.priorities.findByPk(obj.priority_id),
-        status: async (obj, args, context, info) =>
-            db.status.findByPk(obj.status_id),
-        assigned_to_user: async (obj, args, context, info) =>
-            db.users.findByPk(obj.assigned_to_user_id),
+        user: async (obj, args, context, info) => db.users.findByPk(obj.user_id),
     },
 }
