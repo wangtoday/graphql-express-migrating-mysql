@@ -9,7 +9,9 @@ export const typeDefs = gql`
 
     type Mutation {
         createUser(id: ID!, email: String!,name:String!): User!
+        updateUser(id:ID!):String
     }
+
 
     type User {
         id: ID!
@@ -24,6 +26,10 @@ export const resolvers = {
         user: async (obj, args, context, info) => db.users.findByPk(args.id),
     },
     Mutation: {
+        // 1
+        updateUser: async (parent, args) => {
+            return db.users.update({ name: 'new name whatever' }, { where: { id: args.id } }).then(value=>"haha")
+        },
         // 2
         createUser: async (parent, args) => {
             console.log('----: ', args, parent)
