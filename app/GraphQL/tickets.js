@@ -23,7 +23,11 @@ export const typeDefs = gql`
 
 export const resolvers = {
     Query: {
-        tickets: async () => db.tickets.findAll(),
+        tickets: async () => db.tickets.findAll().map(value => {
+            value.subject = 'this is a subject ahhh';
+            console.log('awsome ahh? ', value)
+            return value
+        }),
         ticket: async (obj, args, context, info) =>
             db.tickets.findByPk(args.id),
     },
